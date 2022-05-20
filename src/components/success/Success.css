@@ -1,0 +1,46 @@
+.success {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8rem 0 0;
+}
+
+.success svg {
+  font-size: 100px;
+  color: #02f0a1;
+}
+
+.success h2 {
+  margin: 20px 0 0;
+  color: #02f0a1;
+}
+
+.success p {
+  margin: 10px 0 0;
+  color: #808080;
+}
+
+.eth_scan {
+  font-size: 20px;
+  text-decoration: none;
+  color: #02f0a1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 30px 0 0;
+}
+
+.eth_scan svg {
+  font-size: 30px;
+}
+
+.success_footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+}

@@ -2,13 +2,9 @@ import { useContext, useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { GlobalContext } from "../../context/GlobalState";
 import "./Home.css";
-import { FaEthereum } from "react-icons/fa";
-import { FiPower } from "react-icons/fi";
-import { FaRegUserCircle } from "react-icons/fa";
 
 function Home() {
-  const { address, connectWallet, accountBalance, history } =
-    useContext(GlobalContext);
+  const { address, accountBalance, history } = useContext(GlobalContext);
 
   const navigate = useNavigate();
 
@@ -24,24 +20,6 @@ function Home() {
 
   return (
     <div className="home container">
-      <div className="header">
-        <div className="logo">
-          <FaEthereum />
-        </div>
-        <div className="app_name">
-          <h2>KRYPT</h2>
-        </div>
-        {!address ? (
-          <button className="header_btn" onClick={connectWallet}>
-            <FiPower />
-          </button>
-        ) : (
-          <div className="user">
-            <FaRegUserCircle />
-          </div>
-        )}
-      </div>
-
       {!address ? (
         <>
           <h3 style={{ margin: "0 1.5rem 1rem", color: "#fff" }}>

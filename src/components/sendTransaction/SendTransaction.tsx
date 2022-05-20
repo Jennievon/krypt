@@ -1,8 +1,7 @@
-import { useContext, useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 import { GlobalContext } from "../../context/GlobalState";
+import { ImSpinner2 } from "react-icons/im";
 import "./SendTransaction.css";
-import { FaEthereum } from "react-icons/fa";
-import { IoMdArrowRoundBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 
 function SendTransaction() {
@@ -16,10 +15,14 @@ function SendTransaction() {
 
   const navigate = useNavigate();
 
+  const [loading, setLoading] = useState(false);
+
   const handleSubmit = (e: any) => {
+    setLoading(true);
     e.preventDefault();
     sendTransaction();
     getHistory();
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -30,20 +33,6 @@ function SendTransaction() {
 
   return (
     <div className="sendTX container">
-      <div className="header">
-        <div className="logo">
-          <FaEthereum />
-        </div>
-        <div className="app_name">
-          <h2>KRYPTON</h2>
-        </div>
-        <button className="header_btn" style={{ fontSize: "18px" }}>
-          <IoMdArrowRoundBack
-            onClick={() => navigate("/", { replace: true })}
-          />
-        </button>
-      </div>
-
       <div className="form_body">
         <h3>Add Recipient</h3>
 
@@ -58,7 +47,7 @@ function SendTransaction() {
           />
           <input
             type="text"
-            placeholder="amount"
+            placeholder="Enter amount"
             value={formData.amount}
             onChange={(e) =>
               setFormData({ ...formData, amount: e.target.value })
@@ -79,7 +68,7 @@ function SendTransaction() {
           onClick={handleSubmit}
           disabled={!formData.addressTo}
         >
-          Next
+          {loading ? <ImSpinner2 className="spinner" /> : "Next"}
         </button>
       </div>
     </div>

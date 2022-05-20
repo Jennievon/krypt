@@ -3,6 +3,7 @@ import { GlobalContext } from "../../context/GlobalState";
 import { ImSpinner2 } from "react-icons/im";
 import "./SendTransaction.css";
 import { useNavigate } from "react-router-dom";
+import { Header } from "../header/header";
 
 function SendTransaction() {
   const {
@@ -33,6 +34,7 @@ function SendTransaction() {
 
   return (
     <div className="sendTX container">
+      <Header />
       <div className="form_body">
         <h3>Add Recipient</h3>
 

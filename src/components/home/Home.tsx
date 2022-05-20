@@ -1,6 +1,7 @@
 import { useContext, useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { GlobalContext } from "../../context/GlobalState";
+import { Header } from "../header/header";
 import "./Home.css";
 
 function Home() {
@@ -20,6 +21,7 @@ function Home() {
 
   return (
     <div className="home container">
+      <Header />
       {!address ? (
         <>
           <h3 style={{ margin: "0 1.5rem 1rem", color: "#fff" }}>

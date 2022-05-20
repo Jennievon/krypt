@@ -23,8 +23,11 @@ export const GlobalProvider = ({ children }: any) => {
 
   useEffect(() => {
     const oldHistory = JSON.parse(localStorage.getItem("history") || "[]");
-    setHistory(oldHistory);
-  }, []);
+    const filteredHistoryByAddress = oldHistory.filter(
+      (item: any) => item.address === address
+    );
+    setHistory(filteredHistoryByAddress);
+  }, [address]);
 
   // vaiables
   const today = new Date();
@@ -131,6 +134,7 @@ export const GlobalProvider = ({ children }: any) => {
       amount: formData.amount,
       date,
       time,
+      address,
       dollarAmount: (Number(formData.amount) * 2016.14).toFixed(2),
     };
 

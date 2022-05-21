@@ -1,15 +1,18 @@
 import { useContext, useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { GlobalContext } from "../../context/GlobalState";
+import { Transaction } from "../../libs/types";
+import { TransactionsService } from "../../services";
 import { Header } from "../header/header";
 import "./Home.css";
 
 function Home() {
-  const { address, accountBalance, history } = useContext(GlobalContext);
+  const { address, accountBalance } = useContext(GlobalContext);
 
   const navigate = useNavigate();
 
   const [dollarBallance, setDollarBalance] = useState(0);
+  const [transactions, setTransactions] = useState<any>([]);
 
   const handleDollarBalChange = useCallback(() => {
     setDollarBalance(accountBalance * 2016.14);
@@ -18,6 +21,14 @@ function Home() {
   useEffect(() => {
     handleDollarBalChange();
   }, [accountBalance, handleDollarBalChange]);
+
+  useEffect(() => {
+    const getTransactions = async () => {
+      const transactions = await TransactionsService.getTransactions(address);
+      setTransactions(transactions);
+    };
+    getTransactions();
+  }, [address]);
 
   return (
     <div className="home container">
@@ -67,7 +78,7 @@ function Home() {
           </div>
 
           <div className="history">
-            {history.map((item, index) => (
+            {transactions.map((item: Transaction, index: number) => (
               <div className="transaction" key={index}>
                 <div className="txType_and_time">
                   <h4>Sent Ether</h4>

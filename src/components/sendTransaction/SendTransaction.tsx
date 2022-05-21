@@ -18,10 +18,10 @@ function SendTransaction() {
 
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     setLoading(true);
     e.preventDefault();
-    sendTransaction();
+    await sendTransaction();
     getHistory();
     setLoading(false);
   };

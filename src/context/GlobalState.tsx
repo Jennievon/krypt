@@ -22,13 +22,6 @@ export const GlobalProvider = ({ children }: any) => {
   const [confirmTransaction, setConfirmTransaction] = useState(null);
   const [hash, setHash] = useState({});
 
-  useEffect(() => {
-    const getTransactions = async () => {
-      await TransactionsService.getTransactions(address);
-    };
-    getTransactions();
-  }, [address]);
-
   // variables
   const today = new Date();
   const date =

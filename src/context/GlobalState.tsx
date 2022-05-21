@@ -18,6 +18,7 @@ export const GlobalProvider = ({ children }: any) => {
     addressTo: "",
     amount: "",
   });
+
   const [history, setHistory] = useState<Transaction[]>([]);
   const [confirmTransaction, setConfirmTransaction] = useState(null);
   const [hash, setHash] = useState({});
@@ -31,16 +32,15 @@ export const GlobalProvider = ({ children }: any) => {
   // Functions
   const connectWallet = async () => {
     try {
-      // @ts-ignore
-      if (typeof window.ethereum === "undefined") {
+      if (typeof (window as any).ethereum === "undefined") {
         return;
       } else {
-        // @ts-ignore
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const provider = new ethers.providers.Web3Provider(
+          (window as any).ethereum
+        );
         await provider.send("eth_requestAccounts", []);
         const signer = provider.getSigner();
         let currentAddress = await signer.getAddress();
-
         setAddress(currentAddress);
       }
     } catch (error) {
@@ -49,39 +49,40 @@ export const GlobalProvider = ({ children }: any) => {
   };
 
   const getAddress = async () => {
-    // @ts-ignore
-    if (typeof window.ethereum === "undefined") {
+    if (typeof (window as any).ethereum === "undefined") {
       return;
     } else {
-      // @ts-ignore
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const provider = new ethers.providers.Web3Provider(
+        (window as any).ethereum
+      );
       const signer = provider.getSigner();
       let currentAddress = await signer.getAddress();
-
       setAddress(currentAddress);
     }
   };
 
   const handleAccountChange = () => {
-    // @ts-ignore
-    if (typeof window.ethereum === "undefined") {
+    if (typeof (window as any).ethereum === "undefined") {
       return;
     } else {
-      // @ts-ignore
-      window.ethereum.on("accountsChanged", (accounts) => {
-        getAddress();
+      (window as any).ethereum.on("accountsChanged", (accounts: any) => {
+        if (accounts.length > 0) {
+          getAddress();
+        } else {
+          setAddress("");
+        }
       });
     }
   };
 
   const getBalance = async () => {
     try {
-      // @ts-ignore
-      if (typeof window.ethereum === "undefined") {
+      if (typeof (window as any).ethereum === "undefined") {
         return;
       } else {
-        // @ts-ignore
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const provider = new ethers.providers.Web3Provider(
+          (window as any).ethereum
+        );
         let balance: any = await provider.getBalance(address);
         balance = parseFloat(ethers.utils.formatEther(balance));
 
@@ -94,13 +95,13 @@ export const GlobalProvider = ({ children }: any) => {
 
   const sendTransaction = async () => {
     try {
-      // @ts-ignore
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const provider = new ethers.providers.Web3Provider(
+        (window as any).ethereum
+      );
       const { addressTo, amount } = formData;
       const parsedAmount = ethers.utils.parseEther(amount);
 
-      // @ts-ignore
-      const tx = await window.ethereum.request({
+      const tx = await (window as any).ethereum.request({
         method: "eth_sendTransaction",
         params: [
           {
@@ -135,7 +136,6 @@ export const GlobalProvider = ({ children }: any) => {
       return;
     }
 
-    // @ts-ignore
     setHistory([newTransaction, ...history]);
 
     TransactionsService.addTransaction(newTransaction, history);

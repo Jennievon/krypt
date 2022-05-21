@@ -18,5 +18,5 @@ export interface Transaction {
   date: string;
   time: string;
   address: string;
-  dollarAmount: string;
+  fiatAmount: string;
 }

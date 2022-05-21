@@ -129,7 +129,7 @@ export const GlobalProvider = ({ children }: any) => {
       date,
       time,
       address,
-      dollarAmount: (Number(formData.amount) * 2016.14).toFixed(2),
+      fiatAmount: (Number(formData.amount) * 2016.14).toFixed(2),
     };
 
     if (formData.addressTo === "" || formData.amount === "") {

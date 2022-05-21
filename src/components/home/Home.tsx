@@ -88,7 +88,7 @@ function Home() {
                 </div>
                 <div className="amount">
                   <h4>-{item.amount} ETH</h4>
-                  <p>-${item.dollarAmount} USD</p>
+                  <p>-${item.fiatAmount} USD</p>
                 </div>
               </div>
             ))}

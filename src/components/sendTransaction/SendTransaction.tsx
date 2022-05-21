@@ -4,6 +4,7 @@ import { ImSpinner2 } from "react-icons/im";
 import "./SendTransaction.css";
 import { useNavigate } from "react-router-dom";
 import { Header } from "../header/header";
+import { isValidAddress } from "../../libs/utils";
 
 function SendTransaction() {
   const {
@@ -33,40 +34,49 @@ function SendTransaction() {
   }, [confirmTransaction, navigate]);
 
   return (
-    <div className="sendTX container">
+    <div className="send-transaction container">
       <Header />
-      <div className="form_body">
+      <div className="form-container">
         <h3>Add Recipient</h3>
 
         <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="Enter Public Address"
-            value={formData.addressTo}
-            onChange={(e) =>
-              setFormData({ ...formData, addressTo: e.target.value })
-            }
-          />
-          <input
-            type="text"
-            placeholder="Enter amount"
-            value={formData.amount}
-            onChange={(e) =>
-              setFormData({ ...formData, amount: e.target.value })
-            }
-          />
+          <div className="form-group">
+            <input
+              type="text"
+              placeholder="Enter Public Address"
+              value={formData.addressTo}
+              onChange={(e) => {
+                setFormData({ ...formData, addressTo: e.target.value });
+              }}
+            />
+            {!isValidAddress(formData.addressTo) && (
+              <small className="text-danger">
+                Please enter a valid Ethereum address.
+              </small>
+            )}
+          </div>
+          <div className="form-group">
+            <input
+              type="text"
+              placeholder="Enter amount"
+              value={formData.amount}
+              onChange={(e) =>
+                setFormData({ ...formData, amount: e.target.value })
+              }
+            />
+          </div>
         </form>
       </div>
 
       <div className="form_footer">
         <button
-          className="general_btn cancel"
+          className="btn-primary cancel"
           onClick={() => navigate("/", { replace: true })}
         >
           Cancel
         </button>
         <button
-          className="general_btn"
+          className="btn-primary"
           onClick={handleSubmit}
           disabled={!formData.addressTo}
         >

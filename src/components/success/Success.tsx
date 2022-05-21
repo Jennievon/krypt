@@ -35,7 +35,7 @@ function Success() {
 
       <div className="success_footer">
         <button
-          className="general_btn"
+          className="btn-primary"
           onClick={() => navigate("/", { replace: true })}
         >
           Done

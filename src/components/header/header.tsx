@@ -20,7 +20,7 @@ export const Header = () => {
         <h2>KRYPT</h2>
       </div>
       {!address ? (
-        <button className="header_btn" onClick={connectWallet}>
+        <button className="btn-header" onClick={connectWallet}>
           <FiPower />
         </button>
       ) : pathname === "/" ? (
@@ -28,7 +28,7 @@ export const Header = () => {
           <FaRegUserCircle />
         </div>
       ) : (
-        <button className="header_btn" style={{ fontSize: "18px" }}>
+        <button className="btn-header" style={{ fontSize: "18px" }}>
           <IoMdArrowRoundBack
             onClick={() => navigate("/", { replace: true })}
           />

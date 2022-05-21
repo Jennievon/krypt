@@ -70,7 +70,7 @@ function Home() {
 
           <div className="open_form_wrapper">
             <button
-              className="general_btn"
+              className="btn-primary"
               onClick={() => navigate("/send-transaction")}
             >
               Send Ether

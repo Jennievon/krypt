@@ -48,7 +48,7 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
-.header_btn {
+.btn-header {
   padding: 0.7rem;
   border-radius: 50%;
   outline: none;
@@ -65,11 +65,11 @@ body {
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.3);
 }
 
-.header_btn:hover {
+.btn-header:hover {
   color: #02f0a1;
 }
 
-.general_btn {
+.btn-primary {
   background-color: #242d2e;
   border: 1px solid transparent;
   border-radius: 20px;
@@ -83,8 +83,12 @@ body {
   width: 100%;
 }
 
-.general_btn:hover {
+.btn-primary:hover {
   background-color: #323e3f;
+}
+
+.text-danger {
+  color: #de2316;
 }
 
 .spinner {

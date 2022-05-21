@@ -1,10 +1,10 @@
 import { useContext, useState, useEffect } from "react";
 import { GlobalContext } from "../../context/GlobalState";
 import { ImSpinner2 } from "react-icons/im";
-import "./SendTransaction.css";
 import { useNavigate } from "react-router-dom";
-import { Header } from "../header/header";
+import { Header } from "../header/Header";
 import { isValidAddress } from "../../libs/utils";
+import "./SendTransaction.scss";
 
 function SendTransaction() {
   const {
@@ -49,7 +49,7 @@ function SendTransaction() {
                 setFormData({ ...formData, addressTo: e.target.value });
               }}
             />
-            {!isValidAddress(formData.addressTo) && (
+            {formData.addressTo && !isValidAddress(formData.addressTo) && (
               <small className="text-danger">
                 Please enter a valid Ethereum address.
               </small>
@@ -68,9 +68,9 @@ function SendTransaction() {
         </form>
       </div>
 
-      <div className="form_footer">
+      <div className="action-buttons">
         <button
-          className="btn-primary cancel"
+          className="btn-primary text-danger"
           onClick={() => navigate("/", { replace: true })}
         >
           Cancel

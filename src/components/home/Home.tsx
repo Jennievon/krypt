@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { GlobalContext } from "../../context/GlobalState";
 import { Transaction } from "../../libs/types";
 import { TransactionsService } from "../../services";
-import { Header } from "../header/header";
-import "./Home.css";
+import { Header } from "../header/Header";
+import "./Home.scss";
 
 function Home() {
   const { address, accountBalance } = useContext(GlobalContext);
@@ -53,7 +53,7 @@ function Home() {
         </>
       ) : (
         <>
-          <div className="assets_wrapper">
+          <div className="assets-wrapper">
             <div className="assets">
               <h3>
                 Address:{" "}

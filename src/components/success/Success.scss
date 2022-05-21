@@ -4,24 +4,24 @@
   flex-direction: column;
   align-items: center;
   padding: 8rem 0 0;
+
+  svg {
+    font-size: 100px;
+    color: #02f0a1;
+  }
+
+  h2 {
+    margin: 20px 0 0;
+    color: #02f0a1;
+  }
+
+  p {
+    margin: 10px 0 0;
+    color: #808080;
+  }
 }
 
-.success svg {
-  font-size: 100px;
-  color: #02f0a1;
-}
-
-.success h2 {
-  margin: 20px 0 0;
-  color: #02f0a1;
-}
-
-.success p {
-  margin: 10px 0 0;
-  color: #808080;
-}
-
-.eth_scan {
+.eth-scan {
   font-size: 20px;
   text-decoration: none;
   color: #02f0a1;
@@ -31,11 +31,11 @@
   margin: 30px 0 0;
 }
 
-.eth_scan svg {
+.eth-scan svg {
   font-size: 30px;
 }
 
-.success_footer {
+.success-footer {
   position: absolute;
   bottom: 0;
   width: 100%;

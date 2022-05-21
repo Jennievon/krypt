@@ -1,9 +1,9 @@
-import "./Success.css";
+import React, { useContext, useEffect } from "react";
 import { FiCheckCircle } from "react-icons/fi";
 import { BsArrowRightShort } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
-import { useContext, useEffect } from "react";
 import { GlobalContext } from "../../context/GlobalState";
+import "./Success.scss";
 
 function Success() {
   const { confirmTransaction, setConfirmTransaction, hash } =
@@ -28,12 +28,12 @@ function Success() {
         href={`https://ropsten.etherscan.io/tx/${hash.hash}`}
         target="_blank"
         rel="noreferrer"
-        className="eth_scan"
+        className="eth-scan"
       >
         View on Etherscan <BsArrowRightShort />
       </a>
 
-      <div className="success_footer">
+      <div className="success-footer">
         <button
           className="btn-primary"
           onClick={() => navigate("/", { replace: true })}

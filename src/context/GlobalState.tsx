@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect } from "react";
 import { ethers } from "ethers";
-import { useGlobalInterface } from "../libs/types";
+import { useGlobalInterface, Transaction } from "../libs/types";
+import { TransactionsService } from "../services";
 
 // Create context
 // @ts-ignore
@@ -17,19 +18,18 @@ export const GlobalProvider = ({ children }: any) => {
     addressTo: "",
     amount: "",
   });
-  const [history, setHistory] = useState([]);
+  const [history, setHistory] = useState<Transaction[]>([]);
   const [confirmTransaction, setConfirmTransaction] = useState(null);
   const [hash, setHash] = useState({});
 
   useEffect(() => {
-    const oldHistory = JSON.parse(localStorage.getItem("history") || "[]");
-    const filteredHistoryByAddress = oldHistory.filter(
-      (item: any) => item.address === address
-    );
-    setHistory(filteredHistoryByAddress);
+    const getTransactions = async () => {
+      await TransactionsService.getTransactions(address);
+    };
+    getTransactions();
   }, [address]);
 
-  // vaiables
+  // variables
   const today = new Date();
   const date =
     today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
@@ -129,7 +129,7 @@ export const GlobalProvider = ({ children }: any) => {
   };
 
   const getHistory = () => {
-    const newTransaction: any = {
+    const newTransaction: Transaction = {
       txType: "Sent Ether",
       amount: formData.amount,
       date,
@@ -145,8 +145,7 @@ export const GlobalProvider = ({ children }: any) => {
     // @ts-ignore
     setHistory([newTransaction, ...history]);
 
-    const newHistory: any = [newTransaction, ...history];
-    localStorage.setItem("history", JSON.stringify(newHistory));
+    TransactionsService.addTransaction(newTransaction, history);
   };
 
   useEffect(() => {
